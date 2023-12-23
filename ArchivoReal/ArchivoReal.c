@@ -27,28 +27,39 @@ int main(){
     tamano=trocearCadena(mensaje, trozos);              //Dividir el mensaje en un array, en cada posicion hay una palabra
 
     for (int i = 0; i < tamano; i++){
-        tr=strtok(trozos[i], "-");                      ///Dividir el mensaje y su unchecksum
-        char *r=malloc(200 * sizeof(char));
+        tr=strtok(trozos[i], "-");                      //Dividir el mensaje y su unchecksum
+        char *r=malloc(100*sizeof(char));
+
         for (int j = 0; j < strlen(tr); j++){
             unchecksum=true;
+            
             for (int k = 0; k < strlen(tr); k++){   
-                if(strcmp(&tr[j], &tr[k])==0 && j!=k){  //Comparar caracter a caracter si es un unchecksum
+                if(tr[j]==tr[k] && j!=k){               //Comparar caracter a caracter si es un unchecksum
                     unchecksum=false;
+                    break;
                 }
             }
             if(unchecksum){
-                strcat(r,&tr[j]);                     //Concatenar todos los unchecksum
+                strncat(r, &tr[j], 1);                  //Concatenar todos los unchecksum
             }
         }
         tr = strtok(NULL, "-");
-        if(strcmp(tr,r)==0){                            //Comprobar si el unchecksum es correcto
-            strcpy(resultado[totalArchivos], r);        //Añardirlo a un array con todos los unchecksum correctos
+
+        printf("%s    %s  ", r, tr);
+        if(strncmp(tr, r, strlen(tr)) == 0){                            //Comprobar si el unchecksum es correcto
+            resultado[totalArchivos] = strdup(r);        //Añardirlo a un array con todos los unchecksum correctos
             totalArchivos++;
         }
+        free(r);
     }
     
     //Mostrar el archivo real numero 33
-    printf("%s", resultado[32]);
+    printf("%s", resultado[1]);
+
+    //Liberar la memoria asignada
+    for (int i = 0; i < totalArchivos; i++) {
+        free(resultado[i]);
+    }
 
     return 0;
 }
