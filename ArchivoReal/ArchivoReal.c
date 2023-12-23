@@ -28,7 +28,7 @@ int main(){
 
     for (int i = 0; i < tamano; i++){
         tr=strtok(trozos[i], "-");                      //Dividir el mensaje y su unchecksum
-        char *r=malloc(100*sizeof(char));
+        char *r=calloc(MAX,sizeof(char));
 
         for (int j = 0; j < strlen(tr); j++){
             unchecksum=true;
@@ -45,16 +45,15 @@ int main(){
         }
         tr = strtok(NULL, "-");
 
-        printf("%s    %s  ", r, tr);
-        if(strncmp(tr, r, strlen(tr)) == 0){                            //Comprobar si el unchecksum es correcto
-            resultado[totalArchivos] = strdup(r);        //Añardirlo a un array con todos los unchecksum correctos
+        if(strncmp(tr, r, strlen(tr)) == 0){             //Comprobar si el unchecksum es correcto
+            resultado[totalArchivos]=strdup(r);        //Añardirlo a un array con todos los unchecksum correctos
             totalArchivos++;
         }
         free(r);
     }
     
     //Mostrar el archivo real numero 33
-    printf("%s", resultado[1]);
+    printf("%s\n", resultado[32]);
 
     //Liberar la memoria asignada
     for (int i = 0; i < totalArchivos; i++) {
