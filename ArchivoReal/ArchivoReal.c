@@ -55,10 +55,5 @@ int main(){
     //Mostrar el archivo real numero 33
     printf("%s\n", resultado[32]);
 
-    //Liberar la memoria asignada
-    for (int i = 0; i < totalArchivos; i++) {
-        free(resultado[i]);
-    }
-
     return 0;
 }
