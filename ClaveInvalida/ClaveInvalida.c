@@ -23,12 +23,9 @@ int main(){
     tamano=trocearCadena(mensaje, trozos);
     for (int i = 0; i < tamano; i+=3){
         contador = 0;
-        char politica[3];
-        strncpy(politica,trozos[i], 3);
-        char letra[2];
-        strncpy(letra,trozos[i+1], 2);
-        char frase[32];
-        strncpy(frase,trozos[i+2], strlen(trozos[i+2]));
+        char *politica=strdup(trozos[i]);
+        char *letra=strdup(trozos[i+1]);
+        char *frase=strdup(trozos[i+2]);
 
         int a = politica[0] - '0';      //Convertir un char a int
         int b = politica[2] - '0';

@@ -45,8 +45,8 @@ int main(){
         }
         tr = strtok(NULL, "-");
 
-        if(strncmp(tr, r, strlen(tr)) == 0){             //Comprobar si el unchecksum es correcto
-            resultado[totalArchivos]=strdup(r);        //Añardirlo a un array con todos los unchecksum correctos
+        if(strncmp(tr, r, strlen(tr)) == 0){            //Comprobar si el unchecksum es correcto
+            resultado[totalArchivos]=strdup(r);         //Añardirlo a un array con todos los unchecksum correctos
             totalArchivos++;
         }
         free(r);
