@@ -5,7 +5,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-#define MAX 4096
+#define MAX 1024
 
 //Lista de struct
 typedef struct{

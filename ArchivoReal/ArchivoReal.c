@@ -5,7 +5,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-#define MAX 2048
+#define MAX 1024
 
 int trocearCadena(char *cadena, char *trozo[]) // cadena que quieres dividir
 {

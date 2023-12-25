@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#define MAX 4096
+#define MAX 1024
 
 int trocearCadena(char *cadena, char *trozo[]) // cadena que quieres dividir
 {
