@@ -5,6 +5,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include <regex.h>
 
 #define MAX 1024
 
@@ -12,7 +13,7 @@ typedef struct{
     char *id;
     char *name;
     char *mail;
-    int age;
+    char *age;
     char *location;
 }usuario;
 
@@ -37,7 +38,7 @@ int trocearComas(char *cadena, char *trozo[]) // cadena que quieres dividir
 }
 
 bool alfaNumerica(char *c){
-    while (*c != NULL) {
+    while (*c != '\0') {
         if (!isalnum(*c)) {
             return false;
         }
@@ -47,7 +48,7 @@ bool alfaNumerica(char *c){
 }
 
 bool numero(char *c) {
-    while (*c != NULL) {
+    while (*c != '\0') {
         if (!isdigit(*c)) {
             return false;
         }
@@ -57,13 +58,31 @@ bool numero(char *c) {
 }
 
 bool letra(char *c) {
-    while (*c != NULL) {
+    while (*c != '\0') {
         if (!isalpha(*c)) {
             return false;
         }
         c++;
     }
     return true;
+}
+
+bool correo(char *c) {
+    regex_t regex;
+    const char *patron = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+
+    if(*c==NULL || *c=='\0'){
+        return true;
+    }
+
+    if (regcomp(&regex, patron, REG_EXTENDED) != 0) {
+        return false;
+    }
+
+    int resultado = regexec(&regex, c, 0, NULL, 0);
+    regfree(&regex);
+
+    return resultado == 0;
 }
 
 int main(){
@@ -82,7 +101,7 @@ int main(){
         u.age=aux[3];
         u.location=aux[4];
 
-        if((u.id != NULL && !alfaNumerica(u.id)) || (u.name != NULL && !alfaNumerica(u.name)) || () || (!numero(u.age)) || (!letra(u.location))){
+        if((u.id != NULL && !alfaNumerica(u.id)) || (u.name != NULL && !alfaNumerica(u.name)) || (u.mail != NULL && !correo(u.mail)) || (!numero(u.age)) || (!letra(u.location))){
             usuariosInvalidos[invalidos]=u;
             invalidos++;
         }
